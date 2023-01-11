@@ -4,9 +4,18 @@ number = '0'
 prime = 0
 sinal = ''
 secun = 0
+sinaldigitado = False
+calculou = False
+
 
 def digitar(num:str):
     global number
+    global calculou
+    global sinaldigitado
+    if calculou:
+        number = '0'
+        calculou = False
+        sinaldigitado = False
     if number != '0':
         number = number + num
         operacao.config(text= f'{number}')
@@ -46,16 +55,36 @@ def numero0():
     digitar('0')
 
 def mais():
-    digitar('+')
+    global sinaldigitado
+    if sinaldigitado:
+        return
+    else:
+        digitar('+')
+        sinaldigitado = True
 
 def menos():
-    digitar('-')
+    global sinaldigitado
+    if sinaldigitado:
+        return
+    else:
+        digitar('-')
+        sinaldigitado = True
 
 def divi():
-    digitar('/')
+    global sinaldigitado
+    if sinaldigitado:
+        return
+    else:
+        digitar('/')
+        sinaldigitado = True
 
 def multi():
-    digitar('*')
+    global sinaldigitado
+    if sinaldigitado:
+        return
+    else:
+        digitar('*')
+        sinaldigitado = True
 
 def ponto():
     digitar('.')
@@ -65,6 +94,7 @@ def calcular(texto:str):
     global secun
     global sinal
     global number
+    global calculou
     if texto.find('+') != -1:
         separado = texto.split('+')
         prime = float(separado[0])
@@ -72,6 +102,7 @@ def calcular(texto:str):
         secun = float(separado[1])
         resultado = prime + secun
         operacao.config(text=f'{number} = {resultado}')
+        calculou = True
     elif texto.find('-') != -1:
         separado = texto.split('-')
         prime = float(separado[0])
@@ -79,6 +110,7 @@ def calcular(texto:str):
         secun = float(separado[1])
         resultado = prime - secun
         operacao.config(text=f'{number} = {resultado}')
+        calculou = True
     elif texto.find('/') != -1:
         separado = texto.split('/')
         prime = float(separado[0])
@@ -86,6 +118,7 @@ def calcular(texto:str):
         secun = float(separado[1])
         resultado = prime / secun
         operacao.config(text=f'{number} = {resultado}')
+        calculou = True
     elif texto.find('*') != -1:
         separado = texto.split('*')
         prime = float(separado[0])
@@ -93,6 +126,7 @@ def calcular(texto:str):
         secun = float(separado[1])
         resultado = prime * secun
         operacao.config(text=f'{number} = {resultado}')
+        calculou = True
 
 def igualar():
     calcular(number)
