@@ -1,22 +1,17 @@
 from tkinter import *
 
-number = '0'
+number = ''
 prime = 0
-sinal = ''
 secun = 0
 sinaldigitado = False
 calculou = False
+colocouponto = False
+numero = 0
 
 
 def digitar(num:str):
     global number
-    global calculou
-    global sinaldigitado
-    if calculou:
-        number = '0'
-        calculou = False
-        sinaldigitado = False
-    if number != '0':
+    if number != '':
         number = number + num
         operacao.config(text= f'{number}')
         
@@ -24,97 +19,147 @@ def digitar(num:str):
         number= num
         operacao.config(text=f'{number}')
     
+    
+    
 def numero1():
+    global numero
+    numero = 1
     digitar('1')
+    
 
 def numero2():
+    global numero
+    numero = 1
     digitar('2')
 
 def numero3():
+    global numero
+    numero = 1
     digitar('3')
 
 def numero4():
+    global numero
+    numero = 1
     digitar('4')
 
 def numero5():
+    global numero
+    numero = 1
     digitar('5')
 
 def numero6():
+    global numero
+    numero = 1
     digitar('6')
 
 def numero7():
+    global numero
+    numero = 1
     digitar('7')
 
 def numero8():
+    global numero
+    numero = 1
     digitar('8')
 
 def numero9():
+    global numero
+    numero = 1
     digitar('9')
 
 def numero0():
+    global numero
+    numero = 1
     digitar('0')
 
 def mais():
     global sinaldigitado
+    global colocouponto
+    global numero
     if sinaldigitado:
         return
     else:
-        digitar('+')
-        sinaldigitado = True
+        if numero == 1:
+            digitar('+')
+            sinaldigitado = True
+            colocouponto = False
+            numero = 0
 
 def menos():
     global sinaldigitado
+    global colocouponto
+    global numero
     if sinaldigitado:
         return
     else:
         digitar('-')
-        sinaldigitado = True
+        if numero == 0:
+            return
+        else:
+            sinaldigitado = True
+            colocouponto = False
+            numero = 0
 
 def divi():
     global sinaldigitado
+    global colocouponto
+    global numero
     if sinaldigitado:
         return
     else:
-        digitar('/')
-        sinaldigitado = True
+        if numero == 1:
+            digitar('/')
+            sinaldigitado = True
+            colocouponto = False
+            numero = 0
 
 def multi():
     global sinaldigitado
+    global colocouponto
+    global numero
     if sinaldigitado:
         return
     else:
-        digitar('*')
-        sinaldigitado = True
+        if numero == 1:
+            digitar('*')
+            sinaldigitado = True
+            colocouponto = False
+            numero = 0
 
 def ponto():
-    digitar('.')
+    global colocouponto
+    global numero
+    if numero == 1:
+        if colocouponto == False:
+            digitar('.')
+            colocouponto = True
+        
 
 def calcular(texto:str):
     global prime
     global secun
-    global sinal
     global number
     global calculou
     if texto.find('+') != -1:
         separado = texto.split('+')
         prime = float(separado[0])
-        sinal = '+'
         secun = float(separado[1])
         resultado = prime + secun
         operacao.config(text=f'{number} = {resultado}')
         calculou = True
     elif texto.find('-') != -1:
         separado = texto.split('-')
-        prime = float(separado[0])
-        sinal = '-'
-        secun = float(separado[1])
-        resultado = prime - secun
+        prime = float(separado[1])
+        secun = float(separado[2])
+        if texto[0] == '-':
+            resultado = -prime - secun
+        else:
+            resultado = prime - secun
         operacao.config(text=f'{number} = {resultado}')
         calculou = True
     elif texto.find('/') != -1:
         separado = texto.split('/')
         prime = float(separado[0])
-        sinal = '/'
         secun = float(separado[1])
         resultado = prime / secun
         operacao.config(text=f'{number} = {resultado}')
@@ -122,14 +167,25 @@ def calcular(texto:str):
     elif texto.find('*') != -1:
         separado = texto.split('*')
         prime = float(separado[0])
-        sinal = '*'
         secun = float(separado[1])
         resultado = prime * secun
         operacao.config(text=f'{number} = {resultado}')
         calculou = True
 
 def igualar():
+    global calculou
+    global number
+    global numero
+    global sinaldigitado
+    global colocouponto
     calcular(number)
+    calculou = True
+    number = ''
+    numero = 0
+    calculou = False
+    sinaldigitado = False
+    colocouponto = False
+
 
 
 janela = Tk()
