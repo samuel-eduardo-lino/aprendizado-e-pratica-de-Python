@@ -89,8 +89,12 @@ def menos():
     global sinaldigitado
     global colocouponto
     global numero
+    global number
     if sinaldigitado:
-        return
+        if number[1:].find('-') == -1:
+            digitar('-')
+        else:
+            return
     else:
         digitar('-')
         if numero == 0:
@@ -147,18 +151,6 @@ def calcular(texto:str):
         resultado = prime + secun
         operacao.config(text=f'{number} = {resultado}')
         calculou = True
-    elif texto.find('-') != -1:
-        separado = texto.split('-')
-        if texto[0] == '-':
-            prime = float(separado[1])
-            secun = float(separado[2])
-            resultado = -prime - secun
-        else:
-            prime = float(separado[0])
-            secun = float(separado[1])
-            resultado = prime - secun
-        operacao.config(text=f'{number} = {resultado}')
-        calculou = True
     elif texto.find('/') != -1:
         separado = texto.split('/')
         prime = float(separado[0])
@@ -171,6 +163,18 @@ def calcular(texto:str):
         prime = float(separado[0])
         secun = float(separado[1])
         resultado = prime * secun
+        operacao.config(text=f'{number} = {resultado}')
+        calculou = True
+    elif texto.find('-') != -1:
+        separado = texto.split('-')
+        if texto[0] == '-':
+            prime = float(separado[1])
+            secun = float(separado[2])
+            resultado = -prime - secun
+        else:
+            prime = float(separado[0])
+            secun = float(separado[1])
+            resultado = prime - secun
         operacao.config(text=f'{number} = {resultado}')
         calculou = True
 
