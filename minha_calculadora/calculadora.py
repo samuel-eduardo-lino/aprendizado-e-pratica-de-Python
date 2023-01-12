@@ -149,11 +149,13 @@ def calcular(texto:str):
         calculou = True
     elif texto.find('-') != -1:
         separado = texto.split('-')
-        prime = float(separado[1])
-        secun = float(separado[2])
         if texto[0] == '-':
+            prime = float(separado[1])
+            secun = float(separado[2])
             resultado = -prime - secun
         else:
+            prime = float(separado[0])
+            secun = float(separado[1])
             resultado = prime - secun
         operacao.config(text=f'{number} = {resultado}')
         calculou = True
