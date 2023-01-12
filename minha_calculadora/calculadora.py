@@ -1,4 +1,5 @@
 from tkinter import *
+from math import sqrt
 
 number = ''
 prime = 0
@@ -177,6 +178,8 @@ def calcular(texto:str):
             resultado = prime - secun
         operacao.config(text=f'{number} = {resultado}')
         calculou = True
+    else:
+        return
 
 def igualar():
     global calculou
@@ -185,13 +188,29 @@ def igualar():
     global sinaldigitado
     global colocouponto
     calcular(number)
-    calculou = True
-    number = ''
-    numero = 0
-    calculou = False
-    sinaldigitado = False
-    colocouponto = False
+    if calculou == True:
+        number = ''
+        numero = 0
+        calculou = False
+        sinaldigitado = False
+        colocouponto = False
 
+
+def apagar_anterior():
+    global number
+    tamanho = len(number)
+    posi = tamanho - 1
+    novo_number = number[0:posi]
+    number = novo_number
+    operacao.config(text=number)
+
+
+def raiz():
+    global number
+    if number.isnumeric():
+        resultado = sqrt(int(number))
+        operacao.config(text=f'\u221A{number} = {resultado}')
+        number = ''
 
 
 janela = Tk()
@@ -199,7 +218,7 @@ janela.title('Calculadora')
 
 
 operacao = Label(janela, width=30, height=2)
-operacao.grid(row=0, column=0, columnspan=4)
+operacao.grid(row=0, column=0, columnspan=5)
 num1 = Button(janela, text='1', height=2, width=5, command=numero1)
 num1.grid(row=1, column=0)
 num2 = Button(janela, text='2', height=2, width=5, command=numero2)
@@ -232,6 +251,10 @@ pont = Button(janela, text='.', height=2, width=5, command=ponto)
 pont.grid(row=4, column=0)
 igual = Button(janela, text='=', height=2, width=5, command=igualar)
 igual.grid(row=4, column=2)
+apagar = Button(janela, text='<-', height=2, width=5, command=apagar_anterior)
+apagar.grid(row=1, column=4)
+raizq = Button(janela, text='\u221A', height=2, width=5, command=raiz)
+raizq.grid(row=2, column=4)
 
 
 
