@@ -162,49 +162,64 @@ def calcular(texto:str):
     global calculou
     if texto.find('+') != -1:
         separado = texto.split('+')
-        prime = float(separado[0])
-        secun = float(separado[1])
-        resultado = prime + secun
-        operacao.delete(0, END)
-        operacao.insert(0, f'{number} = {resultado}')
-        calculou = True
-    elif texto.find('/') != -1:
-        separado = texto.split('/')
-        prime = float(separado[0])
-        secun = float(separado[1])
-        resultado = prime / secun
-        operacao.delete(0, END)
-        operacao.insert(0, f'{number} = {resultado}')
-        calculou = True
-    elif texto.find('%') != -1:
-        separado = texto.split('%')
-        prime = float(separado[0])
-        secun = float(separado[1][1:])
-        resultado = (prime * secun) / 100
-        operacao.delete(0, END)
-        operacao.insert(0, f'{number} = {resultado}')
-        calculou = True
-    elif texto.find('*') != -1:
-        separado = texto.split('*')
-        prime = float(separado[0])
-        secun = float(separado[1])
-        resultado = prime * secun
-        operacao.delete(0, END)
-        operacao.insert(0, f'{number} = {resultado}')
-        calculou = True
-    elif texto.find('-') != -1:
-        separado = texto.split('-')
-        if texto[0] == '-':
-            prime = float(separado[1])
-            secun = float(separado[2])
-            resultado = -prime - secun
-        else:
+        if separado[0].isnumeric() and separado[1].isnumeric():
             prime = float(separado[0])
             secun = float(separado[1])
-            resultado = prime - secun
-        operacao.delete(0, END)
-        operacao.insert(0, f'{number} = {resultado}')
-        calculou = True
+            resultado = prime + secun
+            operacao.delete(0, END)
+            operacao.insert(0, f'{number} = {resultado}')
+            calculou = True
+        else:
+            messagebox.showerror('ERRO', 'a operção é invalida')
+    elif texto.find('/') != -1:
+        separado = texto.split('/')
+        if separado[0].isnumeric() and separado[1].isnumeric():
+            prime = float(separado[0])
+            secun = float(separado[1])
+            resultado = prime / secun
+            operacao.delete(0, END)
+            operacao.insert(0, f'{number} = {resultado}')
+            calculou = True
+        else:
+            messagebox.showerror('ERRO', 'a operção é invalida')
+    elif texto.find('%') != -1:
+        separado = texto.split('%')
+        if separado[0].isnumeric() and separado[1].isnumeric():
+            prime = float(separado[0])
+            secun = float(separado[1][1:])
+            resultado = (prime * secun) / 100
+            operacao.delete(0, END)
+            operacao.insert(0, f'{number} = {resultado}')
+            calculou = True
+        else:
+            messagebox.showerror('ERRO', 'a operção é invalida')
+    elif texto.find('*') != -1:
+        separado = texto.split('*')
+        if separado[0].isnumeric() and separado[1].isnumeric():
+            prime = float(separado[0])
+            secun = float(separado[1])
+            resultado = prime * secun
+            operacao.delete(0, END)
+            operacao.insert(0, f'{number} = {resultado}')
+            calculou = True
+        else:
+            messagebox.showerror('ERRO', 'a operção é invalida')
+    elif texto.find('-') != -1:
+        separado = texto.split('-')
+        if separado[0].isnumeric() and separado[1].isnumeric():
+            if texto[0] == '-':
+                prime = float(separado[1])
+                secun = float(separado[2])
+                resultado = -prime - secun
+            else:
+                prime = float(separado[0])
+                secun = float(separado[1])
+                resultado = prime - secun
+            operacao.delete(0, END)
+            operacao.insert(0, f'{number} = {resultado}')
+            calculou = True
+        else:
+            messagebox.showerror('ERRO', 'a operção é invalida')
     else:
         messagebox.showerror('ERRO', 'a operção é invalida')
 
