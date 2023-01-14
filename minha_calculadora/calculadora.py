@@ -1,5 +1,6 @@
 from tkinter import *
 from math import sqrt
+from tkinter import messagebox
 
 number = ''
 prime = 0
@@ -140,6 +141,18 @@ def ponto():
         if colocouponto == False:
             digitar('.')
             colocouponto = True
+
+def porcent():
+    global sinaldigitado
+    global colocouponto
+    global numero
+    if sinaldigitado:
+        return
+    else:
+        digitar('%*')
+        sinaldigitado = True
+        colocouponto = False
+        numero = 0
         
 
 def calcular(texto:str):
@@ -160,6 +173,14 @@ def calcular(texto:str):
         prime = float(separado[0])
         secun = float(separado[1])
         resultado = prime / secun
+        operacao.delete(0, END)
+        operacao.insert(0, f'{number} = {resultado}')
+        calculou = True
+    elif texto.find('%') != -1:
+        separado = texto.split('%')
+        prime = float(separado[0])
+        secun = float(separado[1][1:])
+        resultado = (prime * secun) / 100
         operacao.delete(0, END)
         operacao.insert(0, f'{number} = {resultado}')
         calculou = True
@@ -185,7 +206,7 @@ def calcular(texto:str):
         operacao.insert(0, f'{number} = {resultado}')
         calculou = True
     else:
-        return
+        messagebox.showerror('ERRO', 'a operção é invalida')
 
 def igualar():
     global calculou
@@ -193,6 +214,7 @@ def igualar():
     global numero
     global sinaldigitado
     global colocouponto
+    number = operacao.get()
     calcular(number)
     if calculou == True:
         number = ''
@@ -236,6 +258,7 @@ def fatorial():
 
 janela = Tk()
 janela.title('Calculadora')
+janela.resizable(False, False)
 
 
 
@@ -283,6 +306,8 @@ raizq = Button(janela, text='\u221A', height=2, width=5, command=raiz)
 raizq.grid(row=3, column=4)
 fatori = Button(janela, text='!', height=2, width=5, command=fatorial)
 fatori.grid(row=4, column=4)
+percent = Button(janela, text='%', height=2, width=5, command=porcent)
+percent.grid(row=5, column=4)
 
 
 
