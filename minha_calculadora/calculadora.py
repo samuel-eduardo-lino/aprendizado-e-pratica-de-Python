@@ -2,6 +2,7 @@ from tkinter import *
 from math import sqrt
 from tkinter import messagebox
 
+
 number = ''
 prime = 0
 secun = 0
@@ -22,8 +23,7 @@ def digitar(num:str):
         number= num
         operacao.delete(0, END)
         operacao.insert(0, number)
-    
-    
+      
     
 def numero1():
     global numero
@@ -36,45 +36,54 @@ def numero2():
     numero = 1
     digitar('2')
 
+
 def numero3():
     global numero
     numero = 1
     digitar('3')
+
 
 def numero4():
     global numero
     numero = 1
     digitar('4')
 
+
 def numero5():
     global numero
     numero = 1
     digitar('5')
+
 
 def numero6():
     global numero
     numero = 1
     digitar('6')
 
+
 def numero7():
     global numero
     numero = 1
     digitar('7')
+
 
 def numero8():
     global numero
     numero = 1
     digitar('8')
 
+
 def numero9():
     global numero
     numero = 1
     digitar('9')
 
+
 def numero0():
     global numero
     numero = 1
     digitar('0')
+
 
 def mais():
     global sinaldigitado
@@ -88,6 +97,7 @@ def mais():
             sinaldigitado = True
             colocouponto = False
             numero = 0
+
 
 def menos():
     global sinaldigitado
@@ -108,6 +118,7 @@ def menos():
             colocouponto = False
             numero = 0
 
+
 def divi():
     global sinaldigitado
     global colocouponto
@@ -120,6 +131,7 @@ def divi():
             sinaldigitado = True
             colocouponto = False
             numero = 0
+
 
 def multi():
     global sinaldigitado
@@ -134,6 +146,7 @@ def multi():
             colocouponto = False
             numero = 0
 
+
 def ponto():
     global colocouponto
     global numero
@@ -141,6 +154,7 @@ def ponto():
         if colocouponto == False:
             digitar('.')
             colocouponto = True
+
 
 def porcent():
     global sinaldigitado
@@ -223,6 +237,7 @@ def calcular(texto:str):
     else:
         messagebox.showerror('ERRO', 'a operção é invalida')
 
+
 def igualar():
     global calculou
     global number
@@ -276,55 +291,71 @@ janela.title('Calculadora')
 janela.resizable(False, False)
 
 
-
 operacao = Entry(janela, text='', width=40)
 operacao.grid(row=0, column=0, columnspan=5)
 scroll = Scrollbar(janela, orient='horizontal', width=10)
 scroll.grid(row=1, column=0, columnspan=5)
 operacao.config(xscrollcommand=scroll.set)
 scroll.config(command=operacao.xview)
+
 num1 = Button(janela, text='1', height=2, width=5, command=numero1)
 num1.grid(row=2, column=0)
+
 num2 = Button(janela, text='2', height=2, width=5, command=numero2)
 num2.grid(row=2, column=1)
+
 num3 = Button(janela, text='3', height=2, width=5, command=numero3)
 num3.grid(row=2, column=2)
+
 num4 = Button(janela, text='4', height=2, width=5, command=numero4)
 num4.grid(row=3, column=0)
+
 num5 = Button(janela, text='5', height=2, width=5, command=numero5)
 num5.grid(row=3, column=1)
+
 num6 = Button(janela, text='6', height=2, width=5, command=numero6)
 num6.grid(row=3, column=2)
+
 num7 = Button(janela, text='7', height=2, width=5, command=numero7)
 num7.grid(row=4, column=0)
+
 num8 = Button(janela, text='8', height=2, width=5, command=numero8)
 num8.grid(row=4, column=1)
+
 num9 = Button(janela, text='9', height=2, width=5, command=numero9)
 num9.grid(row=4, column=2)
+
 num0 = Button(janela, text='0', height=2, width=5, command=numero0)
 num0.grid(row=5, column=1)
+
 sinmais = Button(janela, text='+', height=2, width=5, command=mais)
 sinmais.grid(row=5, column=3)
+
 sinmenos = Button(janela, text='-', height=2, width=5, command=menos)
 sinmenos.grid(row=4, column=3)
+
 sindivi = Button(janela, text='/', height=2, width=5, command=divi)
 sindivi.grid(row=3, column=3)
+
 sinmulti = Button(janela, text='*', height=2, width=5, command=multi)
 sinmulti.grid(row=2, column=3)
+
 pont = Button(janela, text='.', height=2, width=5, command=ponto)
 pont.grid(row=5, column=0)
+
 igual = Button(janela, text='=', height=2, width=5, command=igualar)
 igual.grid(row=5, column=2)
+
 apagar = Button(janela, text='<-', height=2, width=5, command=apagar_anterior)
 apagar.grid(row=2, column=4)
+
 raizq = Button(janela, text='\u221A', height=2, width=5, command=raiz)
 raizq.grid(row=3, column=4)
+
 fatori = Button(janela, text='!', height=2, width=5, command=fatorial)
 fatori.grid(row=4, column=4)
+
 percent = Button(janela, text='%', height=2, width=5, command=porcent)
 percent.grid(row=5, column=4)
-
-
-
 
 janela.mainloop()
